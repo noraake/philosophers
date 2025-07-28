@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philo.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: noakebli <noakebli@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/28 10:21:04 by noakebli          #+#    #+#             */
+/*   Updated: 2025/07/15 11:41:04 by noakebli         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PHILO_H
 # define PHILO_H
 
@@ -8,6 +20,7 @@
 # include <sys/time.h>
 # include <string.h>
 # include <limits.h>
+# include <stdbool.h>
 
 typedef struct s_data
 {
@@ -18,9 +31,11 @@ typedef struct s_data
 	int				nb_must_eat;
 	int				stop;
 	long long		start_time;
+	bool			flag;
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	write;
 	pthread_mutex_t	check;
+	pthread_mutex_t	flaag;
 }	t_data;
 
 typedef struct s_philo
@@ -39,6 +54,7 @@ typedef struct s_philo
 int			ft_atoi(const char *str);
 int			check_args(int argc, char **argv);
 int			init_data(t_data *data, int argc, char **argv);
+int			validate_philo_count(int nb_philo);
 
 /* Init */
 int			init_mutexes(t_data *data);
@@ -52,7 +68,7 @@ long long	time_diff(long long past, long long pres);
 
 /* Actions */
 void		print_action(t_data *data, int id, char *action);
-void		take_forks(t_philo *philo);
+int			take_forks(t_philo *philo);
 void		eat(t_philo *philo);
 void		sleeping(t_philo *philo);
 void		think(t_philo *philo);
@@ -63,6 +79,7 @@ void		*philo_routine(void *arg);
 void		*monitor(void *arg);
 int			check_death(t_philo *philo, t_data *data);
 int			check_meals(t_philo *philos, t_data *data);
+int			is_simulation_stopped(t_data *data);
 
 /* Utils */
 void		free_all(t_philo *philos, t_data *data);

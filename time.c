@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   time.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: noakebli <noakebli@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/28 10:20:54 by noakebli          #+#    #+#             */
+/*   Updated: 2025/04/28 10:20:54 by noakebli         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 
 long long	get_time(void)
@@ -14,7 +26,7 @@ void	ft_sleep(long long time)
 
 	start = get_time();
 	while (get_time() - start < time)
-		usleep(100);
+		usleep(500);
 }
 
 long long	time_diff(long long past, long long pres)
